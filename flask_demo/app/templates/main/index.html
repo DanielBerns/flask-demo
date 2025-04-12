@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Home - My Flask App{% endblock %}
+
+{% block content %}
+  <h1>Welcome to the Main Page!</h1>
+  <p>This is the public index page.</p>
+  {% if current_user.is_authenticated %}
+    <p>You are logged in as {{ current_user.email }}.</p>
+  {% else %}
+    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> or <a href="{{ url_for('auth.signup') }}">sign up</a>.</p>
+  {% endif %}
+
+  <h2>Example Posts:</h2>
+  {% for post in posts %}
+    <div><p>{{ post.author.email }} says: <b>{{ post.body }}</b></p></div>
+  {% endfor %}
+{% endblock %}
